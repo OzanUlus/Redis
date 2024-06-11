@@ -24,14 +24,29 @@ namespace RedisExchangeAPI.Web.Controllers
             return View();
         }
 
-        public IActionResult Show() 
+        public IActionResult Show()
         {
             var datas = db.StringGet("name");
-            if (datas.HasValue)
-            {
+
+            var datas = db.StringGetRange("name", 0, 6);
+
+            var datas = db.StringLength("name");
+
+
+
+
+
+            
+            
                 ViewBag.data = datas.ToString();
-            }
-          return View();
+
+            var count = db.StringIncrement("ziyaretci", 1); //++
+
+            ViewBag.Count = count;
+
+            var decount = db.StringDecrementAsync("ziyaretci", 1).Result; //--
+            ViewBag.decount = decount;
+            return View();
         }
     }
 }
