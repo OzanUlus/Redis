@@ -28,9 +28,9 @@ namespace RedisExchangeAPI.Web.Controllers
         {
             var datas = db.StringGet("name");
 
-            var datas = db.StringGetRange("name", 0, 6);
+            var datas1 = db.StringGetRange("name", 0, 6);
 
-            var datas = db.StringLength("name");
+            var datas2 = db.StringLength("name");
 
 
 
