@@ -4,13 +4,13 @@ using StackExchange.Redis;
 
 namespace RedisExchangeAPI.Web.Controllers
 {
-    public class SortedSetTypeController : Controller
+    public class SortedSetTypeController :Controller
     {
         private readonly RedisService _redisService;
         private readonly IDatabase db;
         private readonly string listKey = "sortedsetNames";
 
-        public SortedSetTypeController(RedisService redisService)
+        public SortedSetTypeController(RedisService redisService) 
         {
             _redisService = redisService;
             db = _redisService.GetDatabase(3);
