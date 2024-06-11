@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IDistributeCacheRedisApp.Web.Controllers
 {
-    
+
     public class ProductsController : Controller
     {
         private IDistributedCache _distributedCache;
@@ -36,7 +36,7 @@ namespace IDistributeCacheRedisApp.Web.Controllers
 
             return View();
         }
-        public async Task<IActionResult> Show() 
+        public async Task<IActionResult> Show()
         {
             //string name = _distributedCache.GetString("name");
             //string surname = await _distributedCache.GetStringAsync("surname");
@@ -55,10 +55,25 @@ namespace IDistributeCacheRedisApp.Web.Controllers
 
             return View();
         }
-        public IActionResult Delete() 
+        public IActionResult Delete()
         {
-         //_distributedCache.Remove("name");
-          return View();
+            //_distributedCache.Remove("name");
+            return View();
+        }
+
+        public IActionResult ImageCache()
+        {
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/download.jpg");
+
+            byte[] imageByte = System.IO.File.ReadAllBytes(path);
+
+            _distributedCache.Set("resim" , imageByte);
+            return View();
+        }
+        public IActionResult ImageShow() 
+        {
+            byte[] resimbyte = _distributedCache.Get("resim");
+            return File(resimbyte, "image/jpg");
         }
     }
 }
